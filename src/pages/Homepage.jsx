@@ -68,7 +68,7 @@ const Homepage = () => {
       setScore((prevScore) => {
         const newScore = prevScore + 1;
         if (newScore === parts.length) {
-          setInterval(()=>setGameOver(true), 1000);
+          setInterval(() => setGameOver(true), 1000);
         }
         return newScore;
       });
@@ -81,7 +81,7 @@ const Homepage = () => {
     <>
       {gameOver && <Popup />}
       <main className="w-screen h-screen bg-green-400 flex justify-center items-center gap-2 p-5">
-        <div className="h-full w-2/5 bg-white p-5 flex flex-col justify-between items-center relative overflow-hidden">
+        <div className="h-full w-2/5 bg-white/90 p-5 flex flex-col justify-between items-center relative overflow-hidden">
           <img
             src="/wooden.jpg"
             alt=""
@@ -97,14 +97,16 @@ const Homepage = () => {
               className="absolute inset-0 w-full h-full object-cover z-10"
             /> */}
             <div className="w-full h-full flex flex-wrap z-30">
-              {parts.map((part) => (
-                <Parts
-                  key={part.id}
-                  id={part.id}
-                  icon={part.icon}
-                  className={part.className}
-                />
-              ))}
+              {[...parts]
+                .sort(() => Math.random() - 0.5)
+                .map((part) => (
+                  <Parts
+                    key={part.id}
+                    id={part.id}
+                    icon={part.icon}
+                    className={part.className}
+                  />
+                ))}
             </div>
           </div>
         </div>
