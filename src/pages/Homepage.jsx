@@ -267,7 +267,7 @@ const Homepage = () => {
             />
           </div> */}
         </div>
-        <div className="h-full w-1/5 bg-gray-800 relative">
+        <div className="h-full w-1/5 bg-white/90 relative">
           <img
             src="/frontsidefull.png"
             alt=""
