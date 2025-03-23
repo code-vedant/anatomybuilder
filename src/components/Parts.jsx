@@ -11,7 +11,7 @@ const Parts = (prop) => {
   }));
 
   return (
-    <div ref={drag} className={`${isDragging ? 'opacity-50' : 'opacity-100'} z-30 px-6 py-2 ${prop.className} `}>
+    <div ref={drag} className={`${isDragging ? 'opacity-50' : 'opacity-100'} z-30 ${prop.className} `}>
       <img src={`/${prop.icon}.png`} alt="" className='w-full'/>
     </div>
   );

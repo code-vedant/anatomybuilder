@@ -63,15 +63,18 @@ const Homepage = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
+  const [placedParts, setPlacedParts] = useState([]);
+
   const handleDrop = (draggedId, targetId) => {
     if (draggedId === targetId) {
       setScore((prevScore) => {
         const newScore = prevScore + 1;
-        if (newScore === parts.length) {
-          setInterval(() => setGameOver(true), 1000);
+        if (newScore === 15) {
+          setTimeout(() => setGameOver(true), 1000);
         }
         return newScore;
       });
+      setPlacedParts((prev) => [...prev, draggedId]);
     } else {
       alert("Try Again!");
     }
@@ -81,12 +84,12 @@ const Homepage = () => {
     <>
       {gameOver && <Popup />}
       <main className="w-screen h-screen bg-green-400 flex justify-center items-center gap-2 p-5">
-        <div className="h-full w-2/5 bg-white/90 p-5 flex flex-col justify-between items-center relative overflow-hidden">
-          <img
+        <div className="h-full w-2/5 bg-white/90  flex flex-col justify-between items-center relative overflow-hidden">
+          {/* <img
             src="/wooden.jpg"
             alt=""
             className="absolute inset-0 w-full h-full object-cover z-10"
-          />
+          /> */}
           <h1 className="text-4xl font-bold w-full text-center z-20">
             Container
           </h1>
@@ -98,6 +101,7 @@ const Homepage = () => {
             /> */}
             <div className="w-full h-full flex flex-wrap z-30">
               {[...parts]
+                .filter((part) => !placedParts.includes(part.id))
                 .sort(() => Math.random() - 0.5)
                 .map((part) => (
                   <Parts
@@ -190,7 +194,9 @@ const Homepage = () => {
               onDrop={handleDrop}
               className="absolute   w-[44px] h-[53px] left-[53.8%] top-[84.6%] pt-[2px]"
             />
+            <h3 className="absolute top-[97%] w-full text-center text-xs text-blue-600">Hold and drag bones to operation area from container</h3>
           </div>
+
           {/* <div className="relative w-[740px] h-[650px] bg-gray-100 border-4 rounded-lg overflow-hidden">
             <img
               src="/skull.png"
